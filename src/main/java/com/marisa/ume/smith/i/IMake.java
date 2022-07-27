@@ -1,4 +1,4 @@
-package com.marisa.ume.smith;
+package com.marisa.ume.smith.i;
 
 import net.minecraft.world.item.ItemStack;
 

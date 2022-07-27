@@ -2,7 +2,7 @@ package com.marisa.ume.item.mould;
 
 
 import com.marisa.ume.group.StoryGroup;
-import com.marisa.ume.smith.IMake;
+import com.marisa.ume.smith.i.IMake;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
