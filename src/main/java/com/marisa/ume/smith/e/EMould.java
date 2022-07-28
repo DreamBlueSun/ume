@@ -3,7 +3,7 @@ package com.marisa.ume.smith.e;
 import com.marisa.ume.item.ItemRegistry;
 import com.marisa.ume.item.mould.ArmorMould;
 import com.marisa.ume.item.mould.Mould;
-import com.marisa.ume.smith.c.SKill;
+import com.marisa.ume.smith.c.Skill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,26 +12,20 @@ import java.util.Random;
 
 public enum EMould {
 
-    UNKNOWN(0, null),
-    ZOMBIE_HEAD(1001, (ArmorMould) ItemRegistry.ZOMBIE_HEAD.get()),
-    ZOMBIE_BODY(2001, (ArmorMould) ItemRegistry.ZOMBIE_BODY.get()),
-    ZOMBIE_LEG(3001, (ArmorMould) ItemRegistry.ZOMBIE_LEG.get()),
-    ZOMBIE_FOOT(4001, (ArmorMould) ItemRegistry.ZOMBIE_FOOT.get()),
-    RABBIT_HEAD(1002, (ArmorMould) ItemRegistry.RABBIT_HEAD.get()),
-    RABBIT_BODY(2002, (ArmorMould) ItemRegistry.RABBIT_BODY.get()),
-    RABBIT_LEG(3002, (ArmorMould) ItemRegistry.RABBIT_LEG.get()),
-    RABBIT_FOOT(4002, (ArmorMould) ItemRegistry.RABBIT_FOOT.get());
-
-    private final int id;
+    UNKNOWN(null),
+    ZOMBIE_HEAD((ArmorMould) ItemRegistry.ZOMBIE_HEAD.get()),
+    ZOMBIE_BODY((ArmorMould) ItemRegistry.ZOMBIE_BODY.get()),
+    ZOMBIE_LEG((ArmorMould) ItemRegistry.ZOMBIE_LEG.get()),
+    ZOMBIE_FOOT((ArmorMould) ItemRegistry.ZOMBIE_FOOT.get()),
+    RABBIT_HEAD((ArmorMould) ItemRegistry.RABBIT_HEAD.get()),
+    RABBIT_BODY((ArmorMould) ItemRegistry.RABBIT_BODY.get()),
+    RABBIT_LEG((ArmorMould) ItemRegistry.RABBIT_LEG.get()),
+    RABBIT_FOOT((ArmorMould) ItemRegistry.RABBIT_FOOT.get());
+    
     private final Mould mould;
 
-    EMould(int id, Mould mould) {
-        this.id = id;
+    EMould(Mould mould) {
         this.mould = mould;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Mould getMould() {
@@ -40,7 +34,7 @@ public enum EMould {
 
     public static EMould getById(int id) {
         for (EMould value : EMould.values()) {
-            if (value.id == id) return value;
+            if (value.mould.getId() == id) return value;
         }
         return UNKNOWN;
     }
@@ -63,9 +57,9 @@ public enum EMould {
         return toArray;
     }
 
-    public static List<SKill> f2A(List<SKill> skills) {
-        List<SKill> list = new ArrayList<>();
-        for (SKill skill : skills) {
+    public static List<Skill> f2A(List<Skill> skills) {
+        List<Skill> list = new ArrayList<>();
+        for (Skill skill : skills) {
             int lv = skill.getLv();
             if (lv == 0) continue;
             int i = lv + (lv > 0 ? -new Random(lv + 1).nextInt() : new Random(-lv - 1).nextInt());
@@ -74,9 +68,9 @@ public enum EMould {
         return list;
     }
 
-    public static List<SKill> f2B(List<SKill> skills) {
-        List<SKill> list = new ArrayList<>();
-        for (SKill skill : skills) {
+    public static List<Skill> f2B(List<Skill> skills) {
+        List<Skill> list = new ArrayList<>();
+        for (Skill skill : skills) {
             int lv = skill.getLv();
             if (lv == 0) continue;
             int i = lv + (lv > 0 ? -new Random(lv).nextInt() : new Random(-lv).nextInt());

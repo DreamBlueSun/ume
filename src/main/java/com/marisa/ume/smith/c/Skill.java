@@ -4,7 +4,7 @@ package com.marisa.ume.smith.c;
  *
  */
 
-public class SKill {
+public class Skill {
 
     private final int type;
     private final int id;
@@ -13,7 +13,7 @@ public class SKill {
     private final int lvMin;
     private final int lvMax;
 
-    public SKill(int type, int id, String name, int lv, int lvMin, int lvMax) {
+    public Skill(int type, int id, String name, int lv, int lvMin, int lvMax) {
         this.type = type;
         this.id = id;
         this.name = name;

@@ -1,8 +1,7 @@
-package com.marisa.ume.item.mould;
-
+package com.marisa.ume.item.widget;
 
 import com.marisa.ume.group.StoryGroup;
-import com.marisa.ume.smith.i.IMake;
+import com.marisa.ume.smith.c.Skill;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -19,27 +18,39 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 抽象模具类
+ *
  */
 
-public abstract class Mould extends Item implements IMake{
+public class Widget extends Item {
     
     private final int id;
+    private final int slotLv;
+    private final Skill skill;
 
-    public Mould(int id) {
+    public Widget(int id, int slotLv, Skill skill) {
         super(new Properties().stacksTo(1).tab(StoryGroup.MAIN));
         this.id = id;
+        this.slotLv = slotLv;
+        this.skill = skill;
     }
 
     public int getId() {
         return id;
     }
 
+    public int getSlotLv() {
+        return slotLv;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> toolTip, @NotNull TooltipFlag flagIn) {
-        toolTip.add(MutableComponent.create(new TranslatableContents("模具")).withStyle(ChatFormatting.LIGHT_PURPLE));
+        toolTip.add(MutableComponent.create(new TranslatableContents("饰品")).withStyle(ChatFormatting.LIGHT_PURPLE));
         toolTip.add(MutableComponent.create(new TranslatableContents("")));
     }
-
+    
 }

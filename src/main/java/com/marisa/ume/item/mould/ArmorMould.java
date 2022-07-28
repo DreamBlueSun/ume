@@ -1,7 +1,8 @@
 package com.marisa.ume.item.mould;
 
 
-import com.marisa.ume.smith.c.SKill;
+import com.marisa.ume.smith.c.Skill;
+import com.marisa.ume.util.MakeUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,16 +26,16 @@ public class ArmorMould extends Mould {
     private final int type;
 
     private final int[] slotsBase;
-    private final List<SKill> skillsBase;
+    private final List<Skill> skillsBase;
 
     private int[] slots;
-    private List<SKill> skills;
+    private List<Skill> skills;
 
     private final Function<int[], int[]> f1;
-    private final Function<List<SKill>, List<SKill>> f2;
+    private final Function<List<Skill>, List<Skill>> f2;
 
-    public ArmorMould(int rank, int type, Function<List<SKill>, List<SKill>> f, SKill... skills) {
-        super();
+    public ArmorMould(int rank, int type, int id, Function<List<Skill>, List<Skill>> f, Skill... skills) {
+        super(id);
         this.rank = rank;
         this.type = type;
         this.slotsBase = new int[]{0, 0, 0};
@@ -43,8 +44,8 @@ public class ArmorMould extends Mould {
         this.f2 = f;
     }
 
-    public ArmorMould(int rank, int type, Function<int[], int[]> f1, int[] slots) {
-        super();
+    public ArmorMould(int rank, int type, int id, Function<int[], int[]> f1, int[] slots) {
+        super(id);
         this.rank = rank;
         this.type = type;
         this.slotsBase = slots;
@@ -53,8 +54,8 @@ public class ArmorMould extends Mould {
         this.f2 = null;
     }
 
-    public ArmorMould(int rank, int type, Function<int[], int[]> f1, int[] slots, Function<List<SKill>, List<SKill>> f2, SKill... skills) {
-        super();
+    public ArmorMould(int rank, int type, int id, Function<int[], int[]> f1, int[] slots, Function<List<Skill>, List<Skill>> f2, Skill... skills) {
+        super(id);
         this.rank = rank;
         this.type = type;
         this.slotsBase = slots;
@@ -63,10 +64,9 @@ public class ArmorMould extends Mould {
         this.f2 = f2;
     }
 
-    public ArmorMould build() {
+    private void build() {
         this.slots = f1 == null ? this.slotsBase.clone() : this.f1.apply(this.slotsBase.clone());
         this.skills = f2 == null ? new ArrayList<>(this.skillsBase) : this.f2.apply(new ArrayList<>(this.skillsBase));
-        return this;
     }
 
     @Override
@@ -83,6 +83,7 @@ public class ArmorMould extends Mould {
 
     @Override
     public void make(ItemStack stack) {
-        //TODO
+        build();
+        MakeUtils.add(stack, this.slots, this.skills);
     }
 }
