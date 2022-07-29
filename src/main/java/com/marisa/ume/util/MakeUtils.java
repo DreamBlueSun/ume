@@ -46,7 +46,7 @@ public class MakeUtils {
     }
 
     public static List<Skill> getSkills(ItemStack stack) {
-        if (stack.getTag() == null) return null;
+        if (stack.getTag() == null) return new ArrayList<>();
         int[] ints1 = stack.getTag().getIntArray(ID_SKILL);
         int[] ints2 = stack.getTag().getIntArray(ID_SKILL_LV);
         if (ints1.length > 0 && ints2.length > 0) {
@@ -56,7 +56,7 @@ public class MakeUtils {
             }
             return list;
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static void clear(ItemStack stack) {

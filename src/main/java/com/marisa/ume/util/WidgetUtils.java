@@ -40,9 +40,9 @@ public class WidgetUtils {
     }
 
     public static List<Skill> getSkills(ItemStack stack) {
-        if (stack.getTag() == null) return null;
+        if (stack.getTag() == null) return new ArrayList<>();
         int[] ints = stack.getTag().getIntArray(ID);
-        return ints.length > 0 ? build(Arrays.stream(ints).filter(i -> i != 0).mapToObj(i -> EWidget.getById(i).getWidget().getSkill()).toList()) : null;
+        return ints.length > 0 ? build(Arrays.stream(ints).filter(i -> i != 0).mapToObj(i -> EWidget.getById(i).getWidget().getSkill()).toList()) : new ArrayList<>();
     }
 
     public static List<Skill> build(List<Skill> listSkill) {
