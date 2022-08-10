@@ -58,12 +58,17 @@ public enum ESkill {
         Multimap<Attribute, AttributeModifier> multimap = HashMultimap.create();
         multimap.put(Attributes.LUCK, new AttributeModifier(UmeUtils.UUID_LUCK, "ume luck modifier", lv, AttributeModifier.Operation.ADDITION));
         return multimap;
-    });
+    }),
+    ENCHANT_UP_MAIN_HAND(3, 3005, "", 0, 1, ESkill::attributesNull);
 
     private final Skill sKill;
 
     ESkill(int type, int id, String name, int lvMin, int lvMax, Function<Integer, Multimap<Attribute, AttributeModifier>> attributesSupplier) {
         this.sKill = new Skill(type, id, name, 0, lvMin, lvMax, attributesSupplier);
+    }
+
+    public int getSkillId() {
+        return sKill.getId();
     }
 
     public static ESkill getById(int id) {

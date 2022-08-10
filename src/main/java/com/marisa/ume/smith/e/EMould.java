@@ -63,6 +63,7 @@ public enum EMould {
             int lv = skill.getLv();
             if (lv == 0) continue;
             int i = lv + (lv > 0 ? -new Random(lv + 1).nextInt() : new Random(-lv - 1).nextInt());
+            if (i == 0) continue;
             list.add(ESkill.getById(skill.getId()).lv(i));
         }
         return list;
@@ -74,7 +75,6 @@ public enum EMould {
             int lv = skill.getLv();
             if (lv == 0) continue;
             int i = lv + (lv > 0 ? -new Random(lv).nextInt() : new Random(-lv).nextInt());
-            if (i == 0) continue;
             list.add(ESkill.getById(skill.getId()).lv(i));
         }
         return list;
